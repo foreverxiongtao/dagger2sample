@@ -1,5 +1,7 @@
 package com.desperado.dagger2sample.mvp.presenter;
 
+import com.desperado.dagger2sample.global.RemoteAPI;
+import com.desperado.dagger2sample.mvp.model.BaseModel;
 import com.desperado.dagger2sample.mvp.view.BaseView;
 
 /*
@@ -17,17 +19,64 @@ import com.desperado.dagger2sample.mvp.view.BaseView;
  *
  * 修订日期 :
  */
-public class BasePresenter<V extends BaseView> implements PresenterHelper<V> {
-    protected V mView;
+public class BasePresenter<V extends BaseView, M extends BaseModel> implements PresenterHelper<V, M> {
+    private V mView;
+    private M mModel;
+    private RemoteAPI mRemoteAPI;
+
+    public BasePresenter(RemoteAPI _remoteAPI) {
+        this.mRemoteAPI = _remoteAPI;
+    }
 
     @Override
-    public void attachView(V view) {
-        this.mView = view;
+    public void initModle(M _model) {
+        this.mModel = _model;
+    }
+
+    @Override
+    public void attachView(V _view) {
+        this.mView = _view;
     }
 
     @Override
     public void detachView() {
-        mView = null;
+        this.mView = null;
     }
+
+    public RemoteAPI getRemoteAPI() {
+        return mRemoteAPI;
+    }
+
+    public V getView() {
+        return mView;
+    }
+
+    public M getModel() {
+        return mModel;
+    }
+//    private V mView;
+//    private T mModel;
+//    private RemoteAPI mRemoteAPI;
+//
+//    public BasePresenter(RemoteAPI _remoteAPI) {
+//        this.mRemoteAPI = _remoteAPI;
+//    }
+//
+//
+//    public void attachView(V view) {
+//        this.mView = view;
+//    }
+//
+//    public void detachView() {
+//        mView = null;
+//    }
+//
+//    protected V getView() {
+//        return mView;
+//    }
+//
+//    public RemoteAPI getRemoteAPI() {
+//        return mRemoteAPI;
+//    }
 
 }

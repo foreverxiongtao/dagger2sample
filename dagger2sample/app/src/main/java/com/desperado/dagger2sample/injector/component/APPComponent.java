@@ -1,7 +1,11 @@
 package com.desperado.dagger2sample.injector.component;
 
 import com.desperado.dagger2sample.GlobalApplication;
+import com.desperado.dagger2sample.global.RemoteAPI;
+import com.desperado.dagger2sample.injector.module.APIModule;
 import com.desperado.dagger2sample.injector.module.APPModule;
+
+import javax.inject.Singleton;
 
 import dagger.Component;
 
@@ -20,7 +24,8 @@ import dagger.Component;
  *
  * 修订日期 :
  */
-@Component(modules = APPModule.class)
+@Singleton
+@Component(modules ={APIModule.class, APPModule.class})
 public interface APPComponent {
     final class Initializer {
         private Initializer() {
@@ -37,4 +42,6 @@ public interface APPComponent {
             return null;
         }
     }
+
+    RemoteAPI getRemoteAPI();
 }

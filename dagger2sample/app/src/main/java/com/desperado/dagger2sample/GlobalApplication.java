@@ -1,7 +1,6 @@
 package com.desperado.dagger2sample;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.desperado.dagger2sample.injector.component.APPComponent;
 
@@ -25,18 +24,18 @@ public class GlobalApplication extends Application {
     /****
      * 获取全局Context
      */
-    private static Context mGlobalApplication;
+    private static GlobalApplication mGlobalApplication;
 
     @Override
     public void onCreate() {
         super.onCreate();
         //初始化全局的连接器
         mAppComponent = APPComponent.Initializer.init(this);
-        mGlobalApplication = getApplicationContext();
+        mGlobalApplication = this;
     }
 
 
-    public static Context getGlobalApplication() {
+    public static GlobalApplication getGlobalApplication() {
         return mGlobalApplication;
     }
 

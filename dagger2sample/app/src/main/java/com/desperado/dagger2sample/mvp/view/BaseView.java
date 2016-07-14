@@ -5,7 +5,7 @@ import android.view.View;
 /*
  *
  *
- * 版 权 :@Copyright 北京优多鲜道科技有限公司版权所有
+ * 版 权 :@Copyright 北京****科技有限公司版权所有
  *
  * 作 者 :desperado
  *
