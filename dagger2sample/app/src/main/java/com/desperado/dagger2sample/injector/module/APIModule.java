@@ -33,7 +33,7 @@ public class APIModule {
     /**
      * 服务器请求地址基类
      */
-    public static final String BASE_URL = "http://www.xxx.com/";
+    public static final String BASE_URL = "http://op.juhe.cn/onebox/";
 
 
     /***

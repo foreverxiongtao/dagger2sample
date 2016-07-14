@@ -1,6 +1,6 @@
 package com.desperado.dagger2sample.global;
 
-import com.desperado.dagger2sample.entity.StudentInfo;
+import com.desperado.dagger2sample.entity.WeatherInfo;
 
 import java.util.Map;
 
@@ -33,6 +33,6 @@ public interface RemoteAPI {
      * @return
      */
     @FormUrlEncoded
-    @POST("index.php?a=login/student/getstudents")
-    Observable<StudentInfo> getstudents(@FieldMap Map<String, String> params);
+    @POST("weather/query")
+    Observable<WeatherInfo> queryweather(@FieldMap Map<String, String> params);
 }

@@ -1,6 +1,6 @@
 package com.desperado.dagger2sample.mvp.model;
 
-import com.desperado.dagger2sample.entity.StudentInfo;
+import com.desperado.dagger2sample.entity.WeatherInfo;
 import com.desperado.dagger2sample.global.RemoteAPI;
 
 import java.util.Map;
@@ -33,7 +33,7 @@ public class MainModel extends BaseModel {
      * @param params 请求参数
      * @return
      */
-    public Observable<StudentInfo> getstudent(Map<String, String> params) {
-        return mRemoteAPI.getstudents(params);
+    public Observable<WeatherInfo> getstudent(Map<String, String> params) {
+        return mRemoteAPI.queryweather(params);
     }
 }

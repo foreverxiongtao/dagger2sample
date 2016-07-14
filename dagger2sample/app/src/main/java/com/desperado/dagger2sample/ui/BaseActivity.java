@@ -1,11 +1,11 @@
 package com.desperado.dagger2sample.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.desperado.dagger2sample.GlobalApplication;
 import com.desperado.dagger2sample.injector.component.APPComponent;
+import com.desperado.dagger2sample.mvp.presenter.BasePresenter;
 
 /*
  *
@@ -22,13 +22,28 @@ import com.desperado.dagger2sample.injector.component.APPComponent;
  *
  * 修订日期 :
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends Activity {
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         initcustomerActivityComponent(GlobalApplication.getGlobalApplication().getAppComponent());
+
+    }
+    /**
+     * 为其他连接器提供全局的连接器依赖
+     **/
+    protected abstract void initcustomerActivityComponent(APPComponent _appcomponent);
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (getCurrentPersenter() != null) {
+            getCurrentPersenter().unsubcrib();
+
+        }
     }
 
-    /**为其他连接器提供全局的连接器依赖**/
-    protected abstract void initcustomerActivityComponent(APPComponent _appcomponent);
+    protected abstract BasePresenter getCurrentPersenter(); //获取当前的业务处理类
+
 }

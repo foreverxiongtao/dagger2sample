@@ -1,5 +1,7 @@
 package com.desperado.dagger2sample.mvp.view;
 
+import com.desperado.dagger2sample.entity.WeatherInfo;
+
 /*
  *
  *
@@ -19,4 +21,6 @@ public interface MainView extends BaseView {
     void refresh();
 
     void loadMore();
+
+    void updateData(WeatherInfo _weatherInfo);
 }

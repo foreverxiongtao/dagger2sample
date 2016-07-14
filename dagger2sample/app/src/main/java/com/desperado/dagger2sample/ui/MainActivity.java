@@ -1,13 +1,16 @@
 package com.desperado.dagger2sample.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.desperado.dagger2sample.R;
+import com.desperado.dagger2sample.entity.WeatherInfo;
 import com.desperado.dagger2sample.injector.component.APPComponent;
 import com.desperado.dagger2sample.injector.component.DaggerMainActivityComponent;
 import com.desperado.dagger2sample.injector.module.MainActivityModule;
+import com.desperado.dagger2sample.mvp.presenter.BasePresenter;
 import com.desperado.dagger2sample.mvp.presenter.MainPresenter;
 import com.desperado.dagger2sample.mvp.view.MainView;
 
@@ -31,11 +34,24 @@ import javax.inject.Inject;
 public class MainActivity extends BaseActivity implements MainView {
     @Inject
     MainPresenter mMainPresenter;
+    private TextView mTv_main_weather_desc;
+    private Button btn_main_querydata;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+    }
+    protected void initView() {
+        mTv_main_weather_desc = (TextView) findViewById(R.id.tv_main_weather_desc);
+        btn_main_querydata = (Button) findViewById(R.id.btn_main_querydata);
+        btn_main_querydata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMainPresenter.updateData("北京");
+            }
+        });
     }
 
     @Override
@@ -44,13 +60,27 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
+    protected BasePresenter getCurrentPersenter() {
+        return mMainPresenter;
+    }
+
+    @Override
     public void refresh() {
 
     }
 
+
+
     @Override
     public void loadMore() {
 
+    }
+
+    @Override
+    public void updateData(WeatherInfo _weatherInfo) {
+        if (_weatherInfo != null) {
+            mTv_main_weather_desc.setText(_weatherInfo.getResult().getData().getRealtime().getCity_name()+":"+_weatherInfo.getResult().getData().getRealtime().getDataUptime());
+        }
     }
 
     @Override
@@ -64,17 +94,12 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void showErrorMsg(String msg, View.OnClickListener onClickListener) {
+    public void showErrorMsg(String msg) {
 
     }
 
     @Override
-    public void showEmptyMsg(String msg, View.OnClickListener onClickListener) {
-
-    }
-
-    @Override
-    public void showNetError(View.OnClickListener onClickListener) {
+    public void showEmptyMsg(String msg) {
 
     }
 }

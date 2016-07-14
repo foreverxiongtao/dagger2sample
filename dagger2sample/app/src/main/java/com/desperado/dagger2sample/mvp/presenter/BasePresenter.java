@@ -3,6 +3,12 @@ package com.desperado.dagger2sample.mvp.presenter;
 import com.desperado.dagger2sample.global.RemoteAPI;
 import com.desperado.dagger2sample.mvp.model.BaseModel;
 import com.desperado.dagger2sample.mvp.view.BaseView;
+import com.desperado.dagger2sample.utils.AbLogUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
 
 /*
  *
@@ -30,7 +36,7 @@ public abstract class BasePresenter<V extends BaseView, M extends BaseModel> imp
     }
 
     private void initModel() {
-        mModel = setUpModle();
+        mModel = setUpModel();
     }
 
     @Override
@@ -53,6 +59,39 @@ public abstract class BasePresenter<V extends BaseView, M extends BaseModel> imp
 
     public M getModel() {
         return mModel;
+    }
+
+
+    /***
+     * 集合用于添加订阅对象
+     */
+    private List<Subscriber> mSubscribers = new ArrayList<>();
+
+    /**
+     * 取消任务订阅
+     **/
+    public void unsubcrib() {
+        try {
+            if (mSubscribers != null && !mSubscribers.isEmpty()) {
+                for (int i = 0; i < mSubscribers.size(); i++) {
+                    Subscriber mSubscriber = mSubscribers.get(i);
+                    if (mSubscriber != null && !mSubscriber.isUnsubscribed()) {
+                        mSubscriber.unsubscribe();
+                        AbLogUtil.i("basePresenter", mSubscriber.getClass().getSimpleName() + "取消订阅成功");
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+            AbLogUtil.i("basePresenter", "取消订阅失败....");
+        }
+    }
+
+    /**
+     * 添加当前的订阅对象到集合中去
+     **/
+    public void addSubscrib(Subscriber _subscriber) {
+        mSubscribers.add(_subscriber);
     }
 
 }

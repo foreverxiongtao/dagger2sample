@@ -1,7 +1,5 @@
 package com.desperado.dagger2sample.mvp.view;
 
-import android.view.View;
-
 /*
  *
  *
@@ -25,11 +23,8 @@ public interface BaseView {
     void dismissLoading();
 
     //显示错误信息
-    void showErrorMsg(String msg, View.OnClickListener onClickListener);
+    void showErrorMsg(String msg);
 
     //显示空信息
-    void showEmptyMsg(String msg, View.OnClickListener onClickListener);
-
-    //网络异常
-    void showNetError(View.OnClickListener onClickListener);
+    void showEmptyMsg(String msg);
 }

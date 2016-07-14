@@ -39,7 +39,7 @@ public interface APPComponent {
          * @return
          */
         public static APPComponent init(GlobalApplication _application) {
-            return null;
+            return DaggerAPPComponent.builder().aPPModule(new APPModule(_application)).build();
         }
     }
 
