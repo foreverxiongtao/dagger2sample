@@ -454,6 +454,7 @@ provideMainActivity这个方法就提供了MainActivity了，原来provideMainPr
 ![text](http://i.imgur.com/VB3KRnf.gif)
 
 有什么意见或建议的请发送邮件到992907013@qq.com
+
 好啦，暂时就写到这里了，dagger2的一些高级用法，下次再补上了，尼玛，都晚上八点了，还在公司撸代码，回家吃饭了!!!!!!!
 
 
