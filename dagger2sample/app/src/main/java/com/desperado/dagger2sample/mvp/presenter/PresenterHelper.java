@@ -17,7 +17,7 @@ package com.desperado.dagger2sample.mvp.presenter;
  */
 public interface PresenterHelper<V, M> {
 
-    void initModle(M _model);
+     M setUpModle();
 
     void attachView(V _view);
 

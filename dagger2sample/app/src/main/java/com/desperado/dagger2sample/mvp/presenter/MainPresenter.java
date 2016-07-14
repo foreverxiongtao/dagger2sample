@@ -3,6 +3,7 @@ package com.desperado.dagger2sample.mvp.presenter;
 import com.desperado.dagger2sample.global.RemoteAPI;
 import com.desperado.dagger2sample.mvp.model.MainModel;
 import com.desperado.dagger2sample.mvp.view.MainView;
+
 /*
  *
  *
@@ -18,9 +19,14 @@ import com.desperado.dagger2sample.mvp.view.MainView;
  *
  * 修订日期 :
  */
-public class MainPresenter extends BasePresenter<MainView,MainModel> {
+public class MainPresenter extends BasePresenter<MainView, MainModel> {
 
     public MainPresenter(RemoteAPI _remoteAPI) {
         super(_remoteAPI);
+    }
+
+    @Override
+    public MainModel setUpModle() {
+        return new MainModel(getRemoteAPI());
     }
 }

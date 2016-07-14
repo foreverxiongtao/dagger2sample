@@ -19,18 +19,18 @@ import com.desperado.dagger2sample.mvp.view.BaseView;
  *
  * 修订日期 :
  */
-public class BasePresenter<V extends BaseView, M extends BaseModel> implements PresenterHelper<V, M> {
+public abstract class BasePresenter<V extends BaseView, M extends BaseModel> implements PresenterHelper<V, M> {
     private V mView;
     private M mModel;
     private RemoteAPI mRemoteAPI;
 
     public BasePresenter(RemoteAPI _remoteAPI) {
         this.mRemoteAPI = _remoteAPI;
+        initModel();
     }
 
-    @Override
-    public void initModle(M _model) {
-        this.mModel = _model;
+    private void initModel() {
+        mModel = setUpModle();
     }
 
     @Override
@@ -54,29 +54,5 @@ public class BasePresenter<V extends BaseView, M extends BaseModel> implements P
     public M getModel() {
         return mModel;
     }
-//    private V mView;
-//    private T mModel;
-//    private RemoteAPI mRemoteAPI;
-//
-//    public BasePresenter(RemoteAPI _remoteAPI) {
-//        this.mRemoteAPI = _remoteAPI;
-//    }
-//
-//
-//    public void attachView(V view) {
-//        this.mView = view;
-//    }
-//
-//    public void detachView() {
-//        mView = null;
-//    }
-//
-//    protected V getView() {
-//        return mView;
-//    }
-//
-//    public RemoteAPI getRemoteAPI() {
-//        return mRemoteAPI;
-//    }
 
 }
